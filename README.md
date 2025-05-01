@@ -31,8 +31,6 @@ Dette prosjektet er et komplett system bygget for Raspberry Pi 4 som kombinerer:
  Database og admin
 - `database.py` – Lager og oppdaterer SQLite-databasen `faceaccess.db`.
 - `admin_brukere.py` – Menyverktøy for å vise, endre og slette brukere + bilder.
-- `vis_brukere.py` – Viser alle registrerte brukere i databasen.
-- `vis_schema.py` – Viser SQL-strukturen (CREATE TABLE) for databasen.
 
 ---
 
@@ -85,8 +83,4 @@ python3 app.py
 
 - Database lagrer hvem som er registrert
 - Kan utvides med innloggingslogg, bildeanalyse, stemmestyring og mer
-
----
-
-© 2024 – FaceAccess 
 
