@@ -3,30 +3,30 @@ import os
 import numpy as np
 import pickle
 
-# Initialiser ansiktsgjenkjenner
-recognizer = cv2.face.LBPHFaceRecognizer_create()
-face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+#Initialiser ansiktsgjenkjenner
+recognizer=cv2.face.LBPHFaceRecognizer_create()
+face_cascade=cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 
-faces = []
-labels = []
-label_map = {}
+faces=[]
+labels=[]
+label_map={}
 
-label_id = 0
+label_id=0
 for name in os.listdir("dataset"):
-    person_path = os.path.join("dataset", name)
+    person_path=os.path.join("dataset", name)
     if not os.path.isdir(person_path):
         continue
 
-    label_map[label_id] = name
+    label_map[label_id]=name
 
     for image_name in os.listdir(person_path):
-        image_path = os.path.join(person_path, image_name)
-        image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+        image_path=os.path.join(person_path, image_name)
+        image=cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
 
         if image is None:
             continue
 
-        faces_rect = face_cascade.detectMultiScale(image, scaleFactor=1.3, minNeighbors=5)
+        faces_rect=face_cascade.detectMultiScale(image, scaleFactor=1.3, minNeighbors=5)
         for (x, y, w, h) in faces_rect:
             roi = image[y:y+h, x:x+w]
             faces.append(roi)
@@ -34,7 +34,7 @@ for name in os.listdir("dataset"):
 
     label_id += 1
 
-# Tren og lagre modellen
+#Her trenes og lages modellen
 recognizer.train(faces, np.array(labels))
 recognizer.save("trainer.yml")
 
